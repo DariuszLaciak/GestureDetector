@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">GestureDetector</string>
+    <string name="gesture_detector">Gesture Detector</string>
+    <string name="accelerometerGestures">Gesty z użyciem akcelerometru</string>
+    <string name="drawingGestures">Gesty rysowane</string>
+    <string name="options">Opcje</string>
+    <string name="logo">Logo</string>
+    <string name="computer_connection">Sposób połączenia z komputerem</string>
+    <string name="choose">Wybierz</string>
+    <string-array name="connection_type">
+        <item>Wi-Fi</item>
+        <item>BlueTooth</item>
+    </string-array>
+    <string name="computer_ip">Podaj adres ip komputera</string>
+    <string name="computer_nowifi">Brak połączenia Wi-Fi. Połączyć?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+</resources>
