@@ -38,4 +38,35 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp" />
 
+    <TextView
+        android:id="@+id/optionsMenuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/computer_connection"
+        android:layout_marginTop="53dp"
+        android:layout_toLeftOf="@+id/computer_connection"
+        android:layout_toStartOf="@+id/computer_connection"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/optionsMenuInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/options_header"
+        android:layout_alignStart="@+id/options_header"
+        android:layout_below="@+id/computer_connection"
+        android:layout_marginTop="38dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/saveOptionsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/optionsMenuInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/save" />
+
 </RelativeLayout>

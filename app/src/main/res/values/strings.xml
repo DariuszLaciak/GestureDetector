@@ -15,4 +15,7 @@
     <string name="computer_nowifi">Brak połączenia Wi-Fi. Połączyć?</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="save">Zapisz</string>
+    <string name="ip_address">Adres ip</string>
+    <string name="bluetooth_address">Adres Mac</string>
 </resources>
