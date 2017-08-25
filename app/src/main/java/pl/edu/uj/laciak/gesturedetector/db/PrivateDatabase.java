@@ -4,7 +4,6 @@ package pl.edu.uj.laciak.gesturedetector.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -39,16 +38,16 @@ public class PrivateDatabase extends SQLiteOpenHelper{
 
     public String getOptionValue(String option){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cur = db.rawQuery("select * from "+OPTIONS_TABLE+" where option='"+option+"'", null );
+        Cursor cur = db.rawQuery("select value from " + OPTIONS_TABLE + " where option='" + option + "'", null);
         if(!cur.moveToNext()){
             return null;
         }
-        return cur.getString(1);
+        return cur.getString(0);
     }
 
     public int getOptionId(String option){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cur = db.rawQuery("select * from "+OPTIONS_TABLE+" where option='"+option+"'", null );
+        Cursor cur = db.rawQuery("select id from " + OPTIONS_TABLE + " where option='" + option + "'", null);
         if(!cur.moveToNext()){
             return 0;
         }
