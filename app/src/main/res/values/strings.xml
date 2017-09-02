@@ -18,4 +18,14 @@
     <string name="save">Zapisz</string>
     <string name="ip_address">Adres ip</string>
     <string name="bluetooth_address">Adres Mac</string>
+    <string name="port_address">Port</string>
+    <string name="cancel">Anuluj</string>
+    <string name="newGesture">Dodaj gest</string>
+    <string name="makeGesture">Wykonaj gest</string>
+    <string name="showGestures">Przeglądaj gesty</string>
+    <string name="back">Wróć</string>
+    <string name="newDrawingText">Narysuj gest</string>
+    <string name="newDrawingDescription">Czynność</string>
+    <string name="newDrawingName">Nazwa gestu</string>
+    <string name="test">Test</string>
 </resources>

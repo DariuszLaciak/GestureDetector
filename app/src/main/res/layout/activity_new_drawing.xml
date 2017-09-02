@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightBlue"
+    tools:context="pl.edu.uj.laciak.gesturedetector.NewDrawingActivity">
+
+    <TextView
+        android:id="@+id/newDrawingNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="37dp"
+        android:text="@string/newDrawingName" />
+
+    <EditText
+        android:id="@+id/newDrawingNameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="24dp"
+        android:layout_toEndOf="@+id/newDrawingNameText"
+        android:layout_toRightOf="@+id/newDrawingNameText"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/newDrawingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newDrawingNameInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="@string/newDrawingText" />
+
+
+    <Button
+        android:id="@+id/saveNewDrawingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
+        android:layout_toLeftOf="@+id/newDrawingText"
+        android:layout_toStartOf="@+id/newDrawingText"
+        android:text="@string/save" />
+
+    <Button
+        android:id="@+id/cancelNewDrawingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/saveNewDrawingButton"
+        android:layout_alignBottom="@+id/saveNewDrawingButton"
+        android:layout_toEndOf="@+id/newDrawingText"
+        android:layout_toRightOf="@+id/newDrawingText"
+        android:text="@string/cancel" />
+
+    <Spinner
+        android:id="@+id/newDrawingSpinner"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/saveNewDrawingButton"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/newDrawingDescriptionText"
+        android:layout_toRightOf="@+id/newDrawingDescriptionText" />
+
+    <TextView
+        android:id="@+id/newDrawingDescriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newDrawingArea"
+        android:layout_alignStart="@+id/newDrawingArea"
+        android:layout_alignTop="@+id/newDrawingSpinner"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="3dp"
+        android:text="@string/newDrawingDescription" />
+
+    <pl.edu.uj.laciak.gesturedetector.view.DrawingView
+        android:id="@+id/newDrawingArea"
+        android:layout_width="350dp"
+        android:layout_height="280dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/white" />
+
+</RelativeLayout>

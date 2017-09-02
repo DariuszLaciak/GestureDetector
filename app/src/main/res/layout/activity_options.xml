@@ -2,41 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
     android:background="@color/lightBlue"
+    android:orientation="vertical"
     android:weightSum="1">
     <TextView
         android:id="@+id/options_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/options"
-        android:layout_marginTop="39dp"
-        android:textStyle="bold"
-        android:textSize="51sp"
-        android:textAlignment="center"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:text="@string/options"
+        android:textAlignment="center"
+        android:textSize="51sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/computer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/computer_connection"
-        android:layout_marginTop="64dp"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textAlignment="center"
         android:layout_below="@+id/options_header"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:text="@string/computer_connection"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
     <Spinner
+        android:id="@+id/computer_connection"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/computer_connection"
-        android:entries="@array/connection_type"
-        android:prompt="@string/choose"
         android:layout_below="@+id/computer"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp" />
+        android:layout_marginTop="42dp"
+        android:entries="@array/connection_type"
+        android:prompt="@string/choose" />
 
     <TextView
         android:id="@+id/optionsMenuText"
@@ -64,9 +64,52 @@
         android:id="@+id/saveOptionsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/optionsMenuInput"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_below="@+id/portInput"
+        android:layout_marginTop="69dp"
+        android:layout_toEndOf="@+id/port_adrress"
+        android:layout_toRightOf="@+id/port_adrress"
         android:text="@string/save" />
+
+    <TextView
+        android:id="@+id/port_adrress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/optionsMenuText"
+        android:layout_alignStart="@+id/optionsMenuText"
+        android:layout_below="@+id/optionsMenuInput"
+        android:layout_marginTop="15dp"
+        android:text="@string/port_address"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/portInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/optionsMenuInput"
+        android:layout_alignStart="@+id/optionsMenuInput"
+        android:layout_below="@+id/optionsMenuInput"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/saveOptionsButton"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_toEndOf="@+id/saveOptionsButton"
+        android:layout_toRightOf="@+id/saveOptionsButton"
+        android:text="@string/cancel" />
+
+    <Button
+        android:id="@+id/testOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cancelButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:text="@string/test" />
 
 </RelativeLayout>

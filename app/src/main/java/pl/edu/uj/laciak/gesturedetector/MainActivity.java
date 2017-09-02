@@ -1,39 +1,27 @@
 package pl.edu.uj.laciak.gesturedetector;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.logging.Logger;
 
 public class MainActivity extends Activity/* implements SensorEventListener*/ {
+    private static final int SHAKE_THRESHOLD = 600;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
-
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-    private static final int SHAKE_THRESHOLD = 600;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         options();
+        drawingGestures();
+        accelerometerGestures();
 
         /*senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -45,7 +33,8 @@ public class MainActivity extends Activity/* implements SensorEventListener*/ {
         drawing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, DrawingGesturesActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
     }

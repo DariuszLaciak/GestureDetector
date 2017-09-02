@@ -2,57 +2,57 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
     android:background="@color/lightBlue"
+    android:orientation="vertical"
     android:weightSum="1">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:src="@drawable/logo"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:contentDescription="@string/logo" />
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/logo"
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/gesture_detector"
-        android:layout_marginTop="155dp"
-        android:textStyle="bold"
-        android:textSize="51sp"
-        android:textAlignment="center"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="155dp"
+        android:text="@string/gesture_detector"
+        android:textAlignment="center"
+        android:textSize="51sp"
+        android:textStyle="bold" />
     <Button
         android:id="@+id/drawingButton"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:text="@string/drawingGestures"
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:text="@string/drawingGestures" />
 
     <Button
         android:id="@+id/accelerometerButton"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:text="@string/accelerometerGestures"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/drawingButton"
         android:layout_alignLeft="@+id/drawingButton"
-        android:layout_alignStart="@+id/drawingButton" />
+        android:layout_alignStart="@+id/drawingButton"
+        android:layout_below="@+id/drawingButton"
+        android:layout_marginTop="23dp"
+        android:text="@string/accelerometerGestures" />
 
     <Button
         android:id="@+id/optionsButton"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:text="@string/options"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/accelerometerButton"
         android:layout_alignLeft="@+id/accelerometerButton"
-        android:layout_alignStart="@+id/accelerometerButton" />
+        android:layout_alignStart="@+id/accelerometerButton"
+        android:layout_below="@+id/accelerometerButton"
+        android:layout_marginTop="23dp"
+        android:text="@string/options" />
 </RelativeLayout>
