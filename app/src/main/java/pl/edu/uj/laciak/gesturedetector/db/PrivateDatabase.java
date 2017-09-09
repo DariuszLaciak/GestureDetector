@@ -9,11 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PrivateDatabase extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "GDDB.db";
     public static final String OPTIONS_TABLE = "GestureDetectorOptions";
     public static final String DRAWING_GESTRURES_TABLE = "GestureDetectorDrawing";
+    public static final String CIRCLE_GESTURES_TABLE = "CircleGesture";
     public static final String SERVER_NAME = "Receiver";
     private Context context;
 
@@ -29,6 +32,16 @@ public class PrivateDatabase extends SQLiteOpenHelper{
         contentValues.put("path", path);
         contentValues.put("action", action);
         db.insert(DRAWING_GESTRURES_TABLE, null, contentValues);
+    }
+
+    public void saveNewCircleGesure(String name, String action, String points) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        onCreate(db);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("points", points);
+        contentValues.put("action", action);
+        db.insert(CIRCLE_GESTURES_TABLE, null, contentValues);
     }
 
     public void saveOptionToPrivateDb(String option, String value){
@@ -56,10 +69,28 @@ public class PrivateDatabase extends SQLiteOpenHelper{
         return cur.getString(0);
     }
 
+    public Cursor getCircleGestures() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cur = db.rawQuery("select * from " + CIRCLE_GESTURES_TABLE, null);
+        return cur;
+    }
+
     public Cursor getDrawingDestures() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cur = db.rawQuery("select * from " + DRAWING_GESTRURES_TABLE, null);
         return cur;
+    }
+
+    public List<String> getCircleGestureData(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<String> list = new ArrayList<>();
+        Cursor cur = db.rawQuery("select name,action from " + CIRCLE_GESTURES_TABLE + " where id=" + id, null);
+        if (!cur.moveToNext()) {
+            return null;
+        }
+        list.add(cur.getString(0));
+        list.add(cur.getString(1));
+        return list;
     }
 
     public int getOptionId(String option){
@@ -91,6 +122,7 @@ public class PrivateDatabase extends SQLiteOpenHelper{
         checkDatabase();
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+OPTIONS_TABLE+"(id integer primary key, Option VARCHAR,Value VARCHAR);");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + DRAWING_GESTRURES_TABLE + "(id integer primary key, Path VARCHAR,Name VARCHAR, Action VARCHAR);");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + CIRCLE_GESTURES_TABLE + "(id integer primary key, Points VARCHAR,Name VARCHAR, Action VARCHAR);");
     }
 
     @Override

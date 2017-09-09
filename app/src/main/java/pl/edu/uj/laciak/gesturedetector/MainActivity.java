@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import org.opencv.android.OpenCVLoader;
 
 public class MainActivity extends Activity/* implements SensorEventListener*/ {
     private static final int SHAKE_THRESHOLD = 600;
@@ -21,7 +24,12 @@ public class MainActivity extends Activity/* implements SensorEventListener*/ {
         setContentView(R.layout.activity_main);
         options();
         drawingGestures();
-        accelerometerGestures();
+        circleGestures();
+        if (!OpenCVLoader.initDebug()) {
+            Log.e(this.getClass().getSimpleName(), "  OpenCVLoader.initDebug(), not working.");
+        } else {
+            Log.d(this.getClass().getSimpleName(), "  OpenCVLoader.initDebug(), working.");
+        }
 
         /*senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -39,12 +47,13 @@ public class MainActivity extends Activity/* implements SensorEventListener*/ {
         });
     }
 
-    private void accelerometerGestures(){
-        Button accelerometer = findViewById(R.id.accelerometerButton);
+    private void circleGestures() {
+        Button accelerometer = findViewById(R.id.circleButton);
         accelerometer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, DottedActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
     }

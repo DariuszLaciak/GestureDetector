@@ -47,6 +47,14 @@ public class DrawingGesturesActivity extends Activity {
                 DrawingGesturesActivity.this.startActivity(intent);
             }
         });
+
+        makeGestureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DrawingGesturesActivity.this, MakeGestureActivity.class);
+                DrawingGesturesActivity.this.startActivity(intent);
+            }
+        });
         /*try {
             String response = new IOAsyncTask().execute("test",db.getServerUrl(),"test").get();
             Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();

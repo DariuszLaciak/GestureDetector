@@ -37,22 +37,22 @@
         android:text="@string/drawingGestures" />
 
     <Button
-        android:id="@+id/accelerometerButton"
+        android:id="@+id/circleButton"
         android:layout_width="250dp"
         android:layout_height="55dp"
         android:layout_alignLeft="@+id/drawingButton"
         android:layout_alignStart="@+id/drawingButton"
         android:layout_below="@+id/drawingButton"
         android:layout_marginTop="23dp"
-        android:text="@string/accelerometerGestures" />
+        android:text="@string/circlesGestures"/>
 
     <Button
         android:id="@+id/optionsButton"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:layout_alignLeft="@+id/accelerometerButton"
-        android:layout_alignStart="@+id/accelerometerButton"
-        android:layout_below="@+id/accelerometerButton"
+        android:layout_alignLeft="@+id/circleButton"
+        android:layout_alignStart="@+id/circleButton"
+        android:layout_below="@+id/circleButton"
         android:layout_marginTop="23dp"
         android:text="@string/options" />
 </RelativeLayout>

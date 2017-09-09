@@ -16,10 +16,10 @@ import android.view.View;
  * TODO: document your custom view class.
  */
 public class DrawingView extends View {
-    private Path drawPath;
-    private Paint drawPaint, canvasPaint;
-    private Canvas drawCanvas;
-    private Bitmap canvasBitmap;
+    protected Path drawPath;
+    protected Paint drawPaint, canvasPaint;
+    protected Canvas drawCanvas;
+    protected Bitmap canvasBitmap;
 
     public DrawingView(Context context) {
         super(context);

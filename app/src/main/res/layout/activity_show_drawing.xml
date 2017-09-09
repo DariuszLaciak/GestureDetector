@@ -7,14 +7,14 @@
     android:background="@color/lightBlue"
     tools:context="pl.edu.uj.laciak.gesturedetector.ShowDrawingActivity">
 
-    <GridLayout
-        android:id="@+id/gridImages"
-        android:layout_width="match_parent"
-        android:layout_height="430dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:stretchMode="spacingWidth"
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:layout_margin="4dp"
+        android:columnWidth="80dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
         android:verticalSpacing="10dp" />
 
     <Button
