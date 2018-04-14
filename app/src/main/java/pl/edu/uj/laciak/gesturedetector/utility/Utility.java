@@ -12,13 +12,17 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,6 +31,7 @@ import java.util.Map;
 
 import pl.edu.uj.laciak.gesturedetector.R;
 import pl.edu.uj.laciak.gesturedetector.db.PrivateDatabase;
+import pl.edu.uj.laciak.gesturedetector.view.DrawingView;
 
 /**
  * Created by darek on 25.08.17.
@@ -174,12 +179,30 @@ public class Utility {
             if (!minimalGesture.contains(-1)) {
                 Node gesture = Node.buildTree(minimalGesture);
                 if (Node.doesNodeContainsOther(justDrawnNode, gesture)) {
-                    Log.d("takie same", id + "");
                     return id;
                 }
             }
         } while (allGestures.moveToNext());
         return -1;
+    }
+
+    public static String saveBitmap(DrawingView view) {
+        OutputStream os = null;
+        String filename = "Drawing_" + SystemClock.elapsedRealtime() + ".jpg";
+        try {
+            os = view.getContext().openFileOutput(filename, Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (Utility.getBitmapFromView(view).compress(Bitmap.CompressFormat.JPEG, 100, os)) {
+            Toast.makeText(view.getContext(), "Pomyślnie dodano gest", Toast.LENGTH_SHORT).show();
+        }
+        try {
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return filename;
     }
 
     public static List<Integer> parseIntegerList(List<String> points) {
@@ -193,6 +216,17 @@ public class Utility {
         points = points.replaceAll("^\\[|]$", "");
         List<String> myList = new ArrayList<String>(Arrays.asList(points.split(",")));
         return myList;
+    }
+
+    public static void saveNextGestureSample(Context context, DrawingView view, String nameInput, String types, int gestureId) {
+        PrivateDatabase db = new PrivateDatabase(context);
+        String savePath = Utility.saveBitmap(view);
+        String name = nameInput;
+        String action = types;
+        Log.d("DBG", savePath);
+        Log.d("DBG", name);
+        Log.d("DBG", action);
+        db.saveNewDrawingGesure(name, action, savePath, gestureId);
     }
 
 

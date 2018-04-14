@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/lightBlue"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:text="@string/settings"
+        android:textSize="16pt"/>
+
+    <TextView
+        android:id="@+id/numberOfRepeats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="216dp"
+        android:text="@string/numberOfRepeats"/>
+
+    <EditText
+        android:id="@+id/numberOfRepeatsValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/numberOfRepeats"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="90dp"
+        android:ems="5"
+        android:inputType="number"/>
+
+    <TextView
+        android:id="@+id/optionsDesc"
+        android:layout_width="237dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:text="@string/optionsDesc"
+        android:textAlignment="center"
+        android:textSize="8pt"/>
+
+    <Button
+        android:id="@+id/saveGestureOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="184dp"
+        android:text="@string/save"/>
+
+</RelativeLayout>

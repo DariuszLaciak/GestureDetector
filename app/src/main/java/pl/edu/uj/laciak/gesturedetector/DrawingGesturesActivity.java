@@ -23,6 +23,7 @@ public class DrawingGesturesActivity extends Activity {
         Button newGestureButton = findViewById(R.id.newDrawingGestureButton);
         Button makeGestureButton = findViewById(R.id.makeDrawingGestureButton);
         Button showGesturesButton = findViewById(R.id.showDrawingGesturesButton);
+        Button gesturesOptions = findViewById(R.id.gesturesSettings);
         Button goBackButton = findViewById(R.id.backDrawing);
 
         goBackButton.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +55,10 @@ public class DrawingGesturesActivity extends Activity {
                 Intent intent = new Intent(DrawingGesturesActivity.this, MakeGestureActivity.class);
                 DrawingGesturesActivity.this.startActivity(intent);
             }
+        });
+        gesturesOptions.setOnClickListener((view) -> {
+            Intent intent = new Intent(DrawingGesturesActivity.this, GesturesSettings.class);
+            DrawingGesturesActivity.this.startActivity(intent);
         });
         /*try {
             String response = new IOAsyncTask().execute("test",db.getServerUrl(),"test").get();

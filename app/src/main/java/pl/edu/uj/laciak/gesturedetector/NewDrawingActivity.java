@@ -1,19 +1,13 @@
 package pl.edu.uj.laciak.gesturedetector;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
 
 import pl.edu.uj.laciak.gesturedetector.db.PrivateDatabase;
 import pl.edu.uj.laciak.gesturedetector.utility.Utility;
@@ -26,6 +20,9 @@ public class NewDrawingActivity extends Activity {
     Spinner types;
     TextView nameInput;
     PrivateDatabase db;
+    int gestureId = 0;
+    int samplesNeeded = 0;
+    int sampleNumber = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +35,29 @@ public class NewDrawingActivity extends Activity {
         nameInput = findViewById(R.id.newDrawingNameInput);
         db = new PrivateDatabase(this);
         Utility.fillSpinner(db, this, types);
+        gestureId = db.getLatestGestureId();
+        gestureId++;
+
+        samplesNeeded = Integer.valueOf(db.getOptionValue("gestureRepeats"));
+
+
+        drawingView.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if (nameInput.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Najpierw nadaj gestowi nazwę!", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                if (sampleNumber == samplesNeeded) {
+                    Toast.makeText(getApplicationContext(), "Jest już wystarczająca liczba próbek", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Utility.saveNextGestureSample(getApplicationContext(), drawingView, nameInput.getText().toString(), types.getSelectedItem().toString(), gestureId);
+                    Toast.makeText(getApplicationContext(), ++sampleNumber + " próbka zapisana", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
 
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -49,34 +69,15 @@ public class NewDrawingActivity extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String savePath = saveBitmap(drawingView);
-                String name = nameInput.getText().toString();
-                String action = types.getSelectedItem().toString();
-                Log.d("DBG", savePath);
-                Log.d("DBG", name);
-                Log.d("DBG", action);
-                db.saveNewDrawingGesure(name, action, savePath);
-                finish();
+                if (sampleNumber == samplesNeeded) {
+                    Toast.makeText(getApplicationContext(), "Zapisano nowy gest", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Zbyt mała liczba próbek - brakuje jeszcze" + (samplesNeeded - sampleNumber), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
 
-    private String saveBitmap(DrawingView view) {
-        OutputStream os = null;
-        String filename = "Drawing_" + SystemClock.elapsedRealtime() + ".jpg";
-        try {
-            os = openFileOutput(filename, MODE_PRIVATE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (Utility.getBitmapFromView(view).compress(Bitmap.CompressFormat.JPEG, 100, os)) {
-            Toast.makeText(this, "Pomyślnie dodano gest", Toast.LENGTH_SHORT).show();
-        }
-        try {
-            os.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return filename;
-    }
+
 }

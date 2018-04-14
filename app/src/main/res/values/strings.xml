@@ -11,10 +11,6 @@
         <item>Wi-Fi</item>
         <item>BlueTooth</item>
     </string-array>
-    <string name="computer_ip">Podaj adres ip komputera</string>
-    <string name="computer_nowifi">Brak połączenia Wi-Fi. Połączyć?</string>
-    <string name="yes">Tak</string>
-    <string name="no">Nie</string>
     <string name="save">Zapisz</string>
     <string name="ip_address">Adres ip</string>
     <string name="bluetooth_address">Adres Mac</string>
@@ -28,4 +24,8 @@
     <string name="newDrawingDescription">Czynność</string>
     <string name="newDrawingName">Nazwa gestu</string>
     <string name="test">Test</string>
+    <string name="drawingSettings">Ustawienia</string>
+    <string name="settings">Ustawienia</string>
+    <string name="numberOfRepeats">Ilość powtórzeń:</string>
+    <string name="optionsDesc">Wpisz liczbę próbek do zapamiętania pojedynczego gestu (do uczenia maszynowego)</string>
 </resources>

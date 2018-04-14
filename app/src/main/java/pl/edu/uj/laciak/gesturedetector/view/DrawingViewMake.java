@@ -3,6 +3,7 @@ package pl.edu.uj.laciak.gesturedetector.view;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -20,6 +21,9 @@ import pl.edu.uj.laciak.gesturedetector.utility.Utility;
  * TODO: document your custom view class.
  */
 public class DrawingViewMake extends DrawingView {
+
+    private long timeToMakeGesture;
+    private long timeToCalculateGesture;
 
     public DrawingViewMake(Context context) {
         super(context);
@@ -40,6 +44,7 @@ public class DrawingViewMake extends DrawingView {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 clear();
+                timeToMakeGesture = SystemClock.elapsedRealtime();
                 drawPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -48,17 +53,21 @@ public class DrawingViewMake extends DrawingView {
             case MotionEvent.ACTION_UP:
                 drawCanvas.drawPath(drawPath, drawPaint);
                 drawPath.reset();
-                compareImages();
-                Log.d("View", "narysowano gest");
+                timeToMakeGesture = SystemClock.elapsedRealtime() - timeToMakeGesture;
+                timeToCalculateGesture = compareImages();
+                Log.d("MakeGesureTime", timeToMakeGesture + "");
+                Log.d("CalculateGestureTime", timeToCalculateGesture + "");
                 break;
             default:
                 return false;
         }
+
         invalidate();
         return true;
     }
 
-    private void compareImages() {
+    private long compareImages() {
+        long startTimeToCompute = SystemClock.elapsedRealtime();
         Map<Integer, Bitmap> map = new HashMap<>();
         Bitmap madeBitmap = Utility.getBitmapFromView(this);
         PrivateDatabase db = new PrivateDatabase(getContext());
@@ -86,5 +95,6 @@ public class DrawingViewMake extends DrawingView {
         } catch (Exception e) {
             Log.d("LOG!", "Nie znaleziono gestu");
         }
+        return SystemClock.elapsedRealtime() - startTimeToCompute;
     }
 }

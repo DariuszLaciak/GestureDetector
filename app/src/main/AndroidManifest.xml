@@ -54,6 +54,9 @@
         <activity
             android:name=".MakeCircleGestureActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".GesturesSettings"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

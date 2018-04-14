@@ -20,7 +20,13 @@ public class Node implements Cloneable, Serializable {
     private boolean firstNode;
 
     public Node(int x, int y, Node prevNode) {
-        Log.d("Dodaje", x + "," + y);
+        if (x == -1) {
+            x++;
+        }
+        if (y == -1) {
+            y++;
+        }
+//        Log.d("Dodaje", x + "," + y);
         if (prevNode == null) {
             this.changeX = 0;
             this.changeY = 0;
@@ -61,18 +67,18 @@ public class Node implements Cloneable, Serializable {
         boolean possible = false;
         int nextX = lastPoint.x;
         int nextY = lastPoint.y;
-        Log.d("start", nextX + ", " + nextY);
+//        Log.d("start", nextX + ", " + nextY);
         do {
             nextX = nextX + node.changeX;
             nextY = nextY + node.changeY;
             if (nextX >= 0 && nextX < Constants.CIRCLE_X && nextY >= 0 && nextY < Constants.CIRCLE_Y) {
                 possible = true;
-                Log.d("next", nextX + ", " + nextY);
+//                Log.d("next", nextX + ", " + nextY);
             } else {
-                Log.d("wyszło", nextX + "," + nextY);
-                Log.d("punkt", node.point.x + ", " + node.point.y);
-                Log.d("prev", node.prevNode.point.x + ", " + node.prevNode.point.y);
-                Log.d("next", node.changeX + ", " + node.changeY);
+//                Log.d("wyszło", nextX + "," + nextY);
+//                Log.d("punkt", node.point.x + ", " + node.point.y);
+//                Log.d("prev", node.prevNode.point.x + ", " + node.prevNode.point.y);
+//                Log.d("next", node.changeX + ", " + node.changeY);
                 possible = false;
                 break;
             }
@@ -81,6 +87,9 @@ public class Node implements Cloneable, Serializable {
     }
 
     public static Node transform(Node node, Point point) {
+        if (node.point.x == point.x && node.point.y == point.y) {
+            return node;
+        }
         int nextX = point.x;
         int nextY = point.y;
         Constants constants = new Constants() {
@@ -95,7 +104,7 @@ public class Node implements Cloneable, Serializable {
             nextX = nextX + node.changeX;
             nextY = nextY + node.changeY;
             list.add(constants.getPointOfPoint(new Point(nextX, nextY)));
-        } while (node.hasPrev() && !node.firstNode);
+        } while (node.hasPrev());
         Collections.reverse(list);
         return Node.buildTree(list);
     }
@@ -125,13 +134,13 @@ public class Node implements Cloneable, Serializable {
     }
 
     public static boolean doesNodeContainsOther(Node justMade, Node gesture) {
-        Node gestureCopy = null, copy2 = null, copy3 = null, justMadeCope = null, copy4 = null;
+        Node copy2 = null, copy3 = null, justMadeCope = null, copy4 = null, justMadeCopy2 = null;
         try {
-            gestureCopy = (Node) gesture.clone();
             copy2 = (Node) gesture.clone();
             copy3 = (Node) gesture.clone();
             justMadeCope = (Node) justMade.clone();
             copy4 = (Node) gesture.clone();
+            justMadeCopy2 = (Node) justMade.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -140,17 +149,15 @@ public class Node implements Cloneable, Serializable {
         Log.d("NOWY", prevCount + "");
         Log.d("STARY", newCount + "");
         if (prevCount != newCount && prevCount > 1) {
-            Log.d("SAME_COUNT", gesture.count() + "");
             return false;
         } else {
             if (prevCount == 1) {
                 return true;
             }
-            if (!checkPossibility(copy2, justMadeCope.point)) {
-                Log.d("POSSIBLE", "tak");
+            if (!checkPossibility(justMadeCope, copy2.point)) {
                 return false;
             } else {
-                Node transformed = transform(copy3, justMadeCope.point);
+                Node transformed = transform(justMadeCopy2, copy3.point);
                 return goThroughNode(copy4, transformed);
             }
         }
@@ -162,7 +169,7 @@ public class Node implements Cloneable, Serializable {
             if (!(node.point.x == toCompare.point.x && node.point.y == toCompare.point.y)) {
                 Log.d("Nie zgadza się", "(" + node.point.x + "," + node.point.y + ") (" + toCompare.point.x + "," + toCompare.point.y + ")");
                 exact = false;
-                break;
+                //break;
             } else {
                 Log.d("Zgadza się", "(" + node.point.x + "," + node.point.y + ") (" + toCompare.point.x + "," + toCompare.point.y + ")");
             }

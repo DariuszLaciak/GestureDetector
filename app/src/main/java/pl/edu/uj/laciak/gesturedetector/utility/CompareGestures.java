@@ -12,6 +12,7 @@ import org.opencv.core.MatOfKeyPoint;
 import org.opencv.features2d.DescriptorExtractor;
 import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FeatureDetector;
+import org.opencv.ml.KNearest;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -65,6 +66,7 @@ public class CompareGestures {
             Mat descriptorExisted = new Mat();
             extractor.compute(gestureToCompare, gesture, descriptorExisted);
             DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMINGLUT);
+            KNearest knn = KNearest.create();
             /*MatOfDMatch dmatchesListOfMat = new MatOfDMatch();
             matcher.match(descriptorMade, descriptorExisted, dmatchesListOfMat);
 
@@ -80,7 +82,7 @@ public class CompareGestures {
             //Log.d("LOG!","Dobre trafienia: "+ goodMatches.size());
 
             LinkedList<MatOfDMatch> dmatchesListOfMat = new LinkedList<>();
-            matcher.knnMatch(descriptorMade, descriptorExisted, dmatchesListOfMat, 2);
+            matcher.knnMatch(descriptorMade, descriptorExisted, dmatchesListOfMat, 4);
 
             LinkedList<DMatch> good_matchesList = new LinkedList<>();
             for (int matchIndx = 0; matchIndx < dmatchesListOfMat.size(); matchIndx++) {
@@ -109,7 +111,7 @@ public class CompareGestures {
             }
         }
         Log.d("LOG!", "Najlepszy match: " + bestMatch + ", wynosi: " + related + "%");
-        if (related < 4) {
+        if (related < 2) {
             return -1;
         }
 

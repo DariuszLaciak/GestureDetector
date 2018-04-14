@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/drawingGesturesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,7 +18,6 @@
         android:id="@+id/newDrawingGestureButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="107dp"
         android:text="@string/newGesture" />
@@ -46,8 +44,17 @@
         android:id="@+id/backDrawing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/gesturesSettings"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="@string/back"/>
+
+    <Button
+        android:id="@+id/gesturesSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/makeDrawingGestureButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="29dp"
-        android:text="@string/back" />
+        android:text="@string/drawingSettings"/>
 </RelativeLayout>

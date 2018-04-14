@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import pl.edu.uj.laciak.gesturedetector.db.PrivateDatabase;
+
 /**
  * TODO: document your custom view class.
  */
@@ -20,6 +22,7 @@ public class DrawingView extends View {
     protected Paint drawPaint, canvasPaint;
     protected Canvas drawCanvas;
     protected Bitmap canvasBitmap;
+    private PrivateDatabase db;
 
     public DrawingView(Context context) {
         super(context);
@@ -89,4 +92,6 @@ public class DrawingView extends View {
     public void clear() {
         drawCanvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR);
     }
+
+
 }

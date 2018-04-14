@@ -21,16 +21,17 @@ public class PrivateDatabase extends SQLiteOpenHelper{
     private Context context;
 
     public PrivateDatabase(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
         this.context = context;
     }
 
-    public void saveNewDrawingGesure(String name, String action, String path) {
+    public void saveNewDrawingGesure(String name, String action, String path, int gestureId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("path", path);
         contentValues.put("action", action);
+        contentValues.put("GestureId", gestureId);
         db.insert(DRAWING_GESTRURES_TABLE, null, contentValues);
     }
 
@@ -81,6 +82,15 @@ public class PrivateDatabase extends SQLiteOpenHelper{
         return cur;
     }
 
+    public int getLatestGestureId() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cur = db.rawQuery("select max(GestureId) from " + DRAWING_GESTRURES_TABLE, null);
+        if (!cur.moveToNext()) {
+            return 0;
+        }
+        return cur.getInt(0);
+    }
+
     public List<String> getCircleGestureData(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         List<String> list = new ArrayList<>();
@@ -121,7 +131,7 @@ public class PrivateDatabase extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         checkDatabase();
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+OPTIONS_TABLE+"(id integer primary key, Option VARCHAR,Value VARCHAR);");
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + DRAWING_GESTRURES_TABLE + "(id integer primary key, Path VARCHAR,Name VARCHAR, Action VARCHAR);");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + DRAWING_GESTRURES_TABLE + "(id integer primary key, Path VARCHAR,Name VARCHAR, Action VARCHAR, GestureId integer);");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + CIRCLE_GESTURES_TABLE + "(id integer primary key, Points VARCHAR,Name VARCHAR, Action VARCHAR);");
     }
 

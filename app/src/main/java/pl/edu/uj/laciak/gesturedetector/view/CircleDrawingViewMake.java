@@ -2,7 +2,9 @@ package pl.edu.uj.laciak.gesturedetector.view;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -17,6 +19,8 @@ import pl.edu.uj.laciak.gesturedetector.utility.Utility;
  * TODO: document your custom view class.
  */
 public class CircleDrawingViewMake extends CircleDrawingView {
+    private long timeToMakeGesture;
+    private long timeToCalculateGesture;
 
     public CircleDrawingViewMake(Context context) {
         super(context);
@@ -38,6 +42,7 @@ public class CircleDrawingViewMake extends CircleDrawingView {
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 clear();
+                timeToMakeGesture = SystemClock.elapsedRealtime();
                 if (!initated)
                     setIDs();
                 finalPoints = new ArrayList<>();
@@ -78,16 +83,21 @@ public class CircleDrawingViewMake extends CircleDrawingView {
                 drawPath.setLastPoint(prevX, prevY);
                 drawCanvas.drawPath(drawPath, drawPaint);
                 drawPath.reset();
-                makeGesture();
+                timeToMakeGesture = SystemClock.elapsedRealtime() - timeToMakeGesture;
+                timeToCalculateGesture = makeGesture();
+                Log.d("MakeGesureTime", timeToMakeGesture + "");
+                Log.d("CalculateGestureTime", timeToCalculateGesture + "");
                 break;
             default:
                 return false;
         }
+
         invalidate();
         return true;
     }
 
-    private void makeGesture() {
+    private long makeGesture() {
+        long timeToCalculate = SystemClock.elapsedRealtime();
         PrivateDatabase db = new PrivateDatabase(getContext());
         Cursor allGestures = db.getCircleGestures();
         int id = Utility.getDrawedGesture(allGestures, getFinalPoints());
@@ -97,5 +107,6 @@ public class CircleDrawingViewMake extends CircleDrawingView {
         } else {
             Toast.makeText(getContext(), "Nie wykryto gestu", Toast.LENGTH_SHORT).show();
         }
+        return SystemClock.elapsedRealtime() - timeToCalculate;
     }
 }
