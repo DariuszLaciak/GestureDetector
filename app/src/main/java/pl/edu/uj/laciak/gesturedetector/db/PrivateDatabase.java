@@ -21,7 +21,7 @@ public class PrivateDatabase extends SQLiteOpenHelper{
     private Context context;
 
     public PrivateDatabase(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 9);
         this.context = context;
     }
 

@@ -72,20 +72,15 @@ public class DrawingViewMake extends DrawingView {
         Bitmap madeBitmap = Utility.getBitmapFromView(this);
         PrivateDatabase db = new PrivateDatabase(getContext());
         Cursor allGestures = db.getDrawingDestures();
-        allGestures.moveToFirst();
-        do {
-            map.put(allGestures.getInt(0), Utility.getBitmapFromFile(allGestures.getString(1), getContext()));
-        }
-        while (allGestures.moveToNext());
-        CompareGestures compareGestures = new CompareGestures(map, madeBitmap);
+        CompareGestures compareGestures = new CompareGestures(allGestures, madeBitmap);
         try {
-            int winner = compareGestures.compare();
+            int winner = compareGestures.compare(this.getContext());
             if (winner == -1) {
                 Toast.makeText(getContext(), "Nie znaleziono gestu", Toast.LENGTH_SHORT).show();
             } else {
                 allGestures.moveToFirst();
                 do {
-                    if (allGestures.getInt(0) == winner) {
+                    if (allGestures.getInt(4) == winner) {
                         break;
                     }
                 } while (allGestures.moveToNext());

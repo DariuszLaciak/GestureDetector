@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import pl.edu.uj.laciak.gesturedetector.db.PrivateDatabase;
 import pl.edu.uj.laciak.gesturedetector.utility.DrawingItem;
 import pl.edu.uj.laciak.gesturedetector.utility.GridViewAdapter;
+import pl.edu.uj.laciak.gesturedetector.utility.Utility;
 
 public class ShowDrawingActivity extends Activity implements AdapterView.OnItemClickListener {
     PrivateDatabase db;
@@ -39,7 +40,7 @@ public class ShowDrawingActivity extends Activity implements AdapterView.OnItemC
         data = new ArrayList<>();
         if (allGestures.getCount() != 0) {
             do {
-                Bitmap bm = resize(getBitmapFromFile(allGestures.getString(1)), 220, 220);
+                Bitmap bm = Utility.resize(getBitmapFromFile(allGestures.getString(1)), 220, 220);
                 data.add(new DrawingItem(allGestures.getInt(0), allGestures.getString(2), bm, allGestures.getString(3)));
             }
             while (allGestures.moveToNext());
@@ -59,26 +60,6 @@ public class ShowDrawingActivity extends Activity implements AdapterView.OnItemC
     }
 
 
-    private Bitmap resize(Bitmap image, int maxWidth, int maxHeight) {
-        if (maxHeight > 0 && maxWidth > 0) {
-            int width = image.getWidth();
-            int height = image.getHeight();
-            float ratioBitmap = (float) width / (float) height;
-            float ratioMax = (float) maxWidth / (float) maxHeight;
-
-            int finalWidth = maxWidth;
-            int finalHeight = maxHeight;
-            if (ratioMax > 1) {
-                finalWidth = (int) ((float) maxHeight * ratioBitmap);
-            } else {
-                finalHeight = (int) ((float) maxWidth / ratioBitmap);
-            }
-            image = Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true);
-            return image;
-        } else {
-            return image;
-        }
-    }
 
     private Bitmap getBitmapFromFile(String filename) {
         InputStream is = null;

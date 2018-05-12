@@ -9,7 +9,7 @@
     <pl.edu.uj.laciak.gesturedetector.view.DrawingViewMake
         android:id="@+id/newDrawingArea"
         android:layout_width="350dp"
-        android:layout_height="330dp"
+        android:layout_height="280dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@color/white"/>
